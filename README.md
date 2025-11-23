@@ -3,8 +3,11 @@
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
 ![Built by](https://img.shields.io/badge/Built%20by-Team%20ZenYukti-purple)
+![Self-Hosted](https://img.shields.io/badge/deployment-self--hosted-orange)
 
 **A compassionate, AI-powered mental health support platform**
+
+> 🏠 **Self-Hosted Project**: OpenMindWell is designed to be deployed by each user with their own infrastructure. There is no central hosted instance - users maintain full control of their data and deployment.
 
 > ⚠️ **IMPORTANT DISCLAIMER**: OpenMindWell is NOT a substitute for professional mental health care. If you are in crisis, please contact emergency services or a crisis hotline immediately.
 
@@ -77,6 +80,44 @@ npm run dev
 
 - Frontend: http://localhost:3000
 - Backend: http://localhost:3001
+
+## 🌐 Deployment
+
+OpenMindWell is a **self-hosted application**. Each deployment requires:
+- Your own Supabase account (free tier available)
+- Your own HuggingFace API token (free tier available)
+- Hosting platform of your choice
+
+### Recommended Deployment Options:
+
+**Option 1: Cloud Hosting (Recommended for production)**
+- **Frontend**: [Vercel](https://vercel.com) (free tier)
+  1. Import GitHub repository
+  2. Add environment variables from `frontend/.env.local.example`
+  3. Deploy automatically from main branch
+  
+- **Backend**: [Render](https://render.com) or [Railway](https://railway.app) (free tier)
+  1. Connect GitHub repository
+  2. Set build command: `cd backend && npm install && npm run build`
+  3. Set start command: `cd backend && npm start`
+  4. Add environment variables from `backend/.env.example`
+
+**Option 2: Self-Hosted (Full control)**
+- Deploy on your own VPS (DigitalOcean, AWS, etc.)
+- Use Docker containers (Dockerfile included in backend)
+- Run with PM2 or systemd for process management
+
+**Option 3: Local Network**
+- Run on local machine for personal use
+- Great for testing and development
+
+**Important Notes:**
+- 🔒 Each user maintains their own database and API keys
+- 🌍 No central hosted instance exists
+- 💰 All infrastructure costs are borne by the deployer
+- 🛡️ You control data privacy and security
+
+See [OPENMINDWELL_PROJECT_GUIDE.md](OPENMINDWELL_PROJECT_GUIDE.md) for detailed deployment instructions.
 
 ## 🚀 Quick Start
 
