@@ -13,7 +13,7 @@
 - ✅ Deployment configs (Dockerfile, render.yaml)
 - ✅ Database schema with Row Level Security
 
-### 2. **Frontend** (Next.js 14 + React + TypeScript + Tailwind)
+### 2. **Frontend** (React 18 + Vite + TypeScript + Tailwind)
 - ✅ Landing page with disclaimers
 - ✅ Anonymous onboarding flow
 - ✅ Dashboard with tabbed navigation
@@ -21,6 +21,7 @@
 - ✅ Journal, habits, resources tabs
 - ✅ Responsive design with Tailwind CSS
 - ✅ Supabase Auth integration
+- ✅ React Router for navigation
 
 ### 3. **Database** (Supabase PostgreSQL)
 - ✅ Complete schema with 8 tables:
@@ -62,7 +63,7 @@ npm install
 
 # Set up environment variables
 cp backend/.env.example backend/.env
-cp frontend/.env.local.example frontend/.env.local
+cp frontend/.env.example frontend/.env
 # (Edit .env files with your Supabase credentials)
 
 # Run both servers
@@ -133,9 +134,9 @@ openmindwell/
 │   └── database/
 │       └── schema.sql      # Complete DB schema
 │
-├── frontend/               # Next.js frontend
+├── frontend/               # React + Vite frontend
 │   └── src/
-│       ├── app/           # Pages
+│       ├── pages/         # Page components
 │       └── lib/           # API clients
 │
 ├── OPENMINDWELL_PROJECT_GUIDE.md  # 📖 Complete guide
