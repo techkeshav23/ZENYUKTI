@@ -113,7 +113,8 @@ This platform does NOT provide:
 ## 🛠️ Tech Stack
 
 ### **Frontend**
-- **Framework**: Next.js 14 (App Router)
+- **Framework**: React 18 with Vite 5
+- **Router**: React Router DOM 6
 - **Language**: TypeScript 5.3
 - **Styling**: Tailwind CSS 3.4
 - **Auth**: Supabase Auth (anonymous sign-in)
@@ -166,13 +167,13 @@ This platform does NOT provide:
                             │
                             ▼
 ┌─────────────────────────────────────────────────────────────────┐
-│                    FRONTEND (Next.js 14)                        │
+│                    FRONTEND (React 18 + Vite)                   │
 │  ┌───────────────────────────────────────────────────────────┐ │
-│  │  Pages: Landing → Onboarding → Dashboard                  │ │
+│  │  Routes: / → /onboarding → /dashboard                  │ │
 │  │  Components: RoomsList, JournalForm, HabitTracker, etc.  │ │
 │  │  API Client: lib/api.ts (REST) + WebSocket client        │ │
 │  └───────────────────────────────────────────────────────────┘ │
-│                     Deployed on: Vercel                         │
+│                     Deployed on: Vercel/Netlify                  │
 └───────────┬────────────────────────────────┬────────────────────┘
             │                                │
             │ HTTP/REST                      │ WebSocket (wss://)
@@ -371,18 +372,18 @@ openmindwell/
 *Falls back to keyword-based crisis detection if not provided.  
 **Defaults to `3001` if not set. Render/Railway will auto-set this in production.
 
-### Frontend Variables (`frontend/.env.local`)
+### Frontend Variables (`frontend/.env`)
 
 | Variable | Description | Example | Required? |
 |----------|-------------|---------|-----------|
-| `NEXT_PUBLIC_API_BASE_URL` | Backend API URL | `http://localhost:3001` | ✅ Yes |
-| `NEXT_PUBLIC_WS_URL` | WebSocket server URL | `ws://localhost:3001` | ✅ Yes |
-| `NEXT_PUBLIC_SUPABASE_URL` | Supabase project URL | `https://abc123.supabase.co` | ✅ Yes |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase anon key | `eyJhbG...` | ✅ Yes |
+| `VITE_API_BASE_URL` | Backend API URL | `http://localhost:3001` | ✅ Yes |
+| `VITE_WS_URL` | WebSocket server URL | `ws://localhost:3001` | ✅ Yes |
+| `VITE_SUPABASE_URL` | Supabase project URL | `https://abc123.supabase.co` | ✅ Yes |
+| `VITE_SUPABASE_ANON_KEY` | Supabase anon key | `eyJhbG...` | ✅ Yes |
 
 **Production values:**
-- `NEXT_PUBLIC_API_BASE_URL`: `https://your-backend.onrender.com`
-- `NEXT_PUBLIC_WS_URL`: `wss://your-backend.onrender.com`
+- `VITE_API_BASE_URL`: `https://your-backend.onrender.com`
+- `VITE_WS_URL`: `wss://your-backend.onrender.com`
 
 ---
 
@@ -478,15 +479,15 @@ PORT=3001
 
 ```bash
 cd ../frontend
-cp .env.local.example .env.local
+cp .env.example .env
 ```
 
-Edit `frontend/.env.local`:
+Edit `frontend/.env`:
 ```env
-NEXT_PUBLIC_API_BASE_URL=http://localhost:3001
-NEXT_PUBLIC_WS_URL=ws://localhost:3001
-NEXT_PUBLIC_SUPABASE_URL=https://your-project-id.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+VITE_API_BASE_URL=http://localhost:3001
+VITE_WS_URL=ws://localhost:3001
+VITE_SUPABASE_URL=https://your-project-id.supabase.co
+VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 ```
 
 #### 10. Run the Application
@@ -587,7 +588,7 @@ In Supabase Table Editor, check:
 1. Push code to GitHub
 2. In Vercel dashboard, click "Import Project"
 3. Select your GitHub repo
-4. Framework: **Next.js**
+4. Framework: **Vite**
 5. Root Directory: `frontend`
 6. Add environment variables (from `frontend/.env.local`)
 7. Click "Deploy"
@@ -651,18 +652,18 @@ Similar to Render, also has 500 hours/month free tier.
    - Go to [vercel.com/dashboard](https://vercel.com/dashboard)
    - Click "Add New" → "Project"
    - Select your GitHub repo
-   - **Framework Preset**: Next.js
+   - **Framework Preset**: Vite
    - **Root Directory**: `frontend`
    - Click "Deploy"
 
 3. **Add Environment Variables:**
    - In Vercel project settings → Environment Variables
-   - Add all from `frontend/.env.local`:
+   - Add all from `frontend/.env`:
      ```
-     NEXT_PUBLIC_API_BASE_URL=https://your-backend.onrender.com
-     NEXT_PUBLIC_WS_URL=wss://your-backend.onrender.com
-     NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
-     NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJ...
+     VITE_API_BASE_URL=https://your-backend.onrender.com
+     VITE_WS_URL=wss://your-backend.onrender.com
+     VITE_SUPABASE_URL=https://your-project.supabase.co
+     VITE_SUPABASE_ANON_KEY=eyJ...
      ```
    - Click "Save"
 
@@ -760,8 +761,8 @@ npx vercel --prod
 
 **Frontend won't load:**
 - Check Vercel logs: Deployments → Click deployment → "Building"
-- Verify `NEXT_PUBLIC_*` env vars are set
-- Ensure `next.config.js` has correct backend URL
+- Verify `VITE_*` env vars are set
+- Ensure `vite.config.ts` has correct settings
 
 **Backend 500 errors:**
 - Check Render logs: Service → Logs tab
